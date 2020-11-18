@@ -4,6 +4,17 @@ output.textContent=salary.value;
 salary.addEventListener('input',function(){
      output.textContent=salary.value;
 });
+
+const name=document.querySelector('#name');
+const error=document.querySelector('.text-error');
+name.addEventListener('input',function(){
+let regText=RegExp("^[A-Z]{1}[a-z]{2,}$");
+if(regText.test(name.value))
+   error.textContent="";
+   else
+   error.textContent="Invalid name";
+});
+
 function save(){
     var name= document.getElementById("name").value;
     var picture = document.querySelector('input[name = profile]:checked').value;
