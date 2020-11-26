@@ -24,8 +24,14 @@ class EmployeePayrollData{
 
     get startDate(){return this._startDate;}
     set startDate(startDate){
-        if(startDate <= new Date())this._startDate = startDate;
-        else throw "Enter valid date";
+        const date = new Date();
+        if(startDate>date) throw 'Start Date is a Future Date';
+        var diff=Math.abs(date.getTime()-startDate.getTime());
+        if(diff / (1000 * 60 * 60 * 24) > 30){
+           throw 'Start Date is beyond 30 Days!';
+        }
+        
+        this._startDate = startDate;
     }
 
     get note(){return this._note;}
