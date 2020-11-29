@@ -52,19 +52,19 @@ const save = (event) => {
 }
 
 function createAndUpdateStorage(){
-  let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+  let employeePayrollList = JSON.parse(localStorage.getItem("employeePayrollList"));
   if(employeePayrollList != undefined){
      let emp=employeePayrollList.find(emp=>emp._id==empPayrollObj._id);
      if(!emp)employeePayrollList.push(createEmployeePayroll())
   else{
     const index = employeePayrollList.map(emp => emp._id)
-                 .indexOf(employee._id);
-    employeePayrollList.splice(index, 1, createEmpData(employee._id));
+                 .indexOf(emp._id);
+    employeePayrollList.splice(index, 1, createEmpData(emp._id));
   }
 }else
     employeePayrollList=[createEmployeePayroll()];
   alert(employeePayrollList.toString());
-  localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList))
+  localStorage.setItem("employeePayrollList", JSON.stringify(employeePayrollList))
 }
 
 const createEmpData = (id) => {
@@ -77,18 +77,18 @@ const createEmpData = (id) => {
 
 const setEmpPayrollData = (employee) => {
   try{
-    employee.name = employeePayrollObj._name;
+    employee.name = empPayrollObj._name;
   }catch(e){
     setTextValue(".text-error", e);
     throw e;
   }
-  employee.picture = employeePayrollObj._picture;
-  employee.gender = employeePayrollObj._gender;
-  employee.department = employeePayrollObj._department;
-  employee.salary = employeePayrollObj._salary;
-  employee.note = employeePayrollObj._note;
+  employee.picture = empPayrollObj._picture;
+  employee.gender = empPayrollObj._gender;
+  employee.department = empPayrollObj._department;
+  employee.salary = empPayrollObj._salary;
+  employee.note = empPayrollObj._note;
   try{
-    employee.startDate = new Date(Date.parse(employeePayrollObj._startDate));
+    employee.startDate = new Date(Date.parse(empPayrollObj._startDate));
   }catch(e){
     setTextValue(".date-error", e);
     throw e;

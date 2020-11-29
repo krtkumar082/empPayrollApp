@@ -5,10 +5,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
     console.log(employeePayrollList);
     document.querySelector(".emp-count").textContent = employeePayrollList.length;
    createInnerHtml();
+   localStorage.removeItem("editEmp");
 });
 
 const getEmployeeFromStorage = () => {
-    return localStorage.getItem("EmployeePayrollList") ? JSON.parse(localStorage.getItem("EmployeePayrollList")) : [];
+    return localStorage.getItem("employeePayrollList") ? JSON.parse(localStorage.getItem("employeePayrollList")) : [];
 };
 
 const createInnerHtml = () => {
@@ -44,17 +45,22 @@ const getDeptHtml = (deptList) => {
     return deptHtml;
 };
 const remove=(node)=>{
-    let employeePayrollData=employeePayrollList.find(emp=>emp._id==node._id);
+    console.log(node);
+    let employeePayrollData=employeePayrollList.find(emp=>emp._id==node.id);
+    console.log(employeePayrollData);
     if(employeePayrollData==undefined)return;
     const index=employeePayrollList.map(emp=>emp._id)
               .indexOf(employeePayrollData._id);
+    console.log(index);
     employeePayrollList.splice(index,1);
+    console.log(employeePayrollList);
     localStorage.setItem("employeePayrollList",JSON.stringify(employeePayrollList));
     document.querySelector(".emp-count").textContent=employeePayrollList.length;
     createInnerHtml();
 }
 const update=(node)=>{
-    let employeePayrollData=employeePayrollList.find(emp=>emp._id==node._id);
+    console.log(node);
+    let employeePayrollData=employeePayrollList.find(emp=>emp._id==node.id);
     if(employeePayrollData==undefined)return;
     localStorage.setItem('editEmp',JSON.stringify(employeePayrollData));
     window.location.replace(site_properties.add_emp_payroll_page);
